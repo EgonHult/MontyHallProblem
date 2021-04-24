@@ -7,9 +7,8 @@ namespace MontyHallProblem
 
         public static decimal CalculateWinningAccuracy(int rightDecision, int noOfSimulations)
         {
-            if (noOfSimulations == 0)
-                throw new Exception("You can't divide something with zero");
-
+            if (noOfSimulations <= 0)
+                throw new Exception("You can't divide something with zero or lover");
 
             decimal accuracyInProcent = (rightDecision / (decimal)noOfSimulations) * 100;
 
