@@ -11,7 +11,7 @@ namespace MontyHallProblem
                 Console.WriteLine("\nHello and welcome to The Monty Hall game");
             while (true)
             {
-                Console.WriteLine("How many simulations do you whant to do? (tips go high and simulat at least 10000 games for more accuracy)\n");
+                Console.WriteLine("\nHow many simulations do you whant to do? (tips go high and simulat at least 10000 games for more accuracy)\n");
 
 
                 int noOfSimulations = Menu.NumberOfSimulationsInput();
@@ -24,7 +24,7 @@ namespace MontyHallProblem
 
                 int rightDecision = MontyHall.MontyHallGame(noOfSimulations, selectedDoor);
 
-                decimal accuracyInProcent = Helpers.CalculateWinningAccuracy(rightDecision, noOfSimulations);
+                double accuracyInProcent = Helpers.CalculateWinningAccuracy(rightDecision, noOfSimulations);
 
                 Console.WriteLine("\nVictories:\t" + rightDecision +
                     "\n\nAttempts:\t"+ noOfSimulations);
