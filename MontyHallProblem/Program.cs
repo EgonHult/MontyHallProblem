@@ -2,83 +2,41 @@
 
 namespace MontyHallProblem
 {
-    class Program : Helpers
+    class Program
     {
+
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Hello and welcome to The Monty Hall game");
-            Console.WriteLine("How many simulations do you whant to do? (tips go high and simulat at least 10000 games for more accuracy)");
+            Console.WriteLine("\nHello, and welcome to The Monty Hall Game!!!");
 
-            int noOfSimulations;
-            do
+            while (true)
             {
-                int.TryParse(Console.ReadLine(), out noOfSimulations);
-                if (noOfSimulations == 0)
-                    Console.WriteLine("Enter a number between 1 and 100´000´000");
+                Console.WriteLine("\nHow many simulations do you whant to do? (Tips: Go high and simulat at least 10000 games for higher accuracy)\n");
 
-            } while (noOfSimulations == 0);
+                int noOfSimulations = GameMenuSelection.NumberOfSimulations();
+                Console.Clear();
+                Console.WriteLine();
+                int selectedDoor = GameMenuSelection.ChangeOrKeepDoor();
 
-            Console.WriteLine();
+                Console.Clear();
+                Console.WriteLine("\nPerfect! Press any key to se the result");
+                Console.ReadKey();
+                Console.Clear();
 
-            int rightDecision = 0;
+                int winningGames = MontyHall.MontyHallGame(noOfSimulations, selectedDoor);
+            
+                double winningpercentage = Helpers.CalculateNumberOfWinsToPercent(winningGames, noOfSimulations);
 
+                Console.WriteLine("\nNew car owners:\t" + winningGames +
+                                  "\n\nAttempts:\t"+ noOfSimulations);
 
-            MontyHall montyHall = new MontyHall();
-
-
-            for (int i = 0; i < noOfSimulations; i++)
-            {
-
-                montyHall.SetPrizeDoor();
-                montyHall.SelectDoor();
-                montyHall.RevealDoor();
-
-                if (montyHall.SholdSwitch())
-                {
-                    rightDecision++;
-                }
+                Console.WriteLine($"\nWinning accuracy: {winningpercentage}%");
+                Console.WriteLine("\nPress any key to try again");
+                Console.ReadKey();
+                Console.Clear();
             }
 
-            Console.WriteLine(rightDecision + "   " + noOfSimulations);
-
-            decimal accuracyInProcent = CalculateWinningAccuracy(rightDecision, noOfSimulations);
-
-            Console.WriteLine($"Winning accuracy in procent: {accuracyInProcent}%");
-
         }
     }
-
-    public class MontyHall
-    {
-        readonly Random _random = new Random();
-
-        public int PrizeDoor { get; set; }
-        public int ChosenDoor { get; set; }
-        public int OpenDoor { get; set; }
-
-        public bool SholdSwitch()
-        {
-            return PrizeDoor != ChosenDoor;
-        }
-
-        public void RevealDoor()
-        {
-            do
-            {
-                OpenDoor = _random.Next(0, 3);
-            } while (OpenDoor == ChosenDoor || OpenDoor == PrizeDoor);
-        }
-
-        public void SetPrizeDoor()
-        {
-            PrizeDoor = _random.Next(0, 3);
-        }
-
-        public void SelectDoor()
-        {
-            ChosenDoor = _random.Next(0, 3);
-        }
-    }
-
 }
