@@ -1,33 +1,42 @@
 using System;
 using Xunit;
-using MontyHallProblem;
+using static MontyHallProblem.MontyHall;
+
+
 namespace MontyHallProblem.xUnitTest
 {
     public class MontyHallTests
     {
+
         [Theory]
-        [InlineData(5, 10, 50)]      
-        [InlineData(455, 2478, 18)]      
-        [InlineData(10 , 4, 250)]
-        [InlineData(7 , 10, 70)]
-        [InlineData(int.MinValue, 5, -42949672960)]
-        [InlineData(int.MinValue, int.MaxValue, -100)]
-
-        public void CalculateWinningAccuracy_InsertTwoValidValues_ReturnTheQuotientMultipliedWithHundred(int dividend, int divisor, double expected)
+        [InlineData(5, 12)]      
+        [InlineData(0, 1)]
+        [InlineData(0, 2)]
+        [InlineData(-5, 45)]
+        [InlineData(int.MinValue, int.MaxValue)]      
+        [InlineData(2, int.MinValue)]
+        [InlineData(int.MaxValue, 1)]
+        [InlineData(10_000_001, 2)]
+        public void MontyHallGame_SetInvalidParameters_ReturnExeption(int noOfSimulations, int changeOrKeep)
         {
-            double actual =  Helpers.CalculateWinningAccuracy(dividend, divisor);
 
-            Assert.Equal(expected, actual);
+            var ex = Assert.Throws<Exception>(() => MontyHallGame(noOfSimulations, changeOrKeep));
+            Assert.Equal("One or both parameters are invalid", ex.Message);
         }
 
 
         [Theory]
-        [InlineData(5, 0)]
-        [InlineData(10000, -1000)]
-        [InlineData(1, int.MinValue)]
-        public void CalculateWinningAccuracy_InsertInValidValue_ReturnExeption(int dividend, int divisor)
+        [InlineData(5, 2)]
+        [InlineData(10_000_000, 1)]
+        [InlineData(165_464, 2)]
+        [InlineData(5, 1)]
+        [InlineData(1, 2)]     
+        public void MontyHallGame_SetTwoValidParameters_ReturnInt32(int noOfSimulations, int changeOrKeep)
         {
-            Assert.Throws<Exception>(() => Helpers.CalculateWinningAccuracy(dividend, divisor));         
+            
+            var actual = MontyHallGame(noOfSimulations, changeOrKeep);
+
+            Assert.Equal(typeof(int), actual.GetType());
         }
 
 

@@ -8,28 +8,30 @@ namespace MontyHallProblem
         static void Main(string[] args)
         {
 
-                Console.WriteLine("\nHello and welcome to The Monty Hall game");
+            Console.WriteLine("\nHello, and welcome to The Monty Hall Game!!!");
+
             while (true)
             {
-                Console.WriteLine("\nHow many simulations do you whant to do? (tips go high and simulat at least 10000 games for more accuracy)\n");
+                Console.WriteLine("\nHow many simulations do you whant to do? (Tips: Go high and simulat at least 10000 games for higher accuracy)\n");
 
-
-                int noOfSimulations = Menu.NumberOfSimulationsInput();
-                int selectedDoor = Menu.ChangeOrKeepDoor();
+                int noOfSimulations = GameMenuSelection.NumberOfSimulations();
+                Console.Clear();
+                Console.WriteLine();
+                int selectedDoor = GameMenuSelection.ChangeOrKeepDoor();
 
                 Console.Clear();
-                Console.WriteLine("Perfect! Press any key to se the result");
+                Console.WriteLine("\nPerfect! Press any key to se the result");
                 Console.ReadKey();
                 Console.Clear();
 
-                int rightDecision = MontyHall.MontyHallGame(noOfSimulations, selectedDoor);
+                int winningGames = MontyHall.MontyHallGame(noOfSimulations, selectedDoor);
+            
+                double winningpercentage = Helpers.CalculateNumberOfWinsToPercent(winningGames, noOfSimulations);
 
-                double accuracyInProcent = Helpers.CalculateWinningAccuracy(rightDecision, noOfSimulations);
+                Console.WriteLine("\nNew car owners:\t" + winningGames +
+                                  "\n\nAttempts:\t"+ noOfSimulations);
 
-                Console.WriteLine("\nVictories:\t" + rightDecision +
-                    "\n\nAttempts:\t"+ noOfSimulations);
-
-                Console.WriteLine($"\nWinning accuracy: {accuracyInProcent}%");
+                Console.WriteLine($"\nWinning accuracy: {winningpercentage}%");
                 Console.WriteLine("\nPress any key to try again");
                 Console.ReadKey();
                 Console.Clear();

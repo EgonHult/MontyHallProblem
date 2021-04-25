@@ -5,14 +5,21 @@ namespace MontyHallProblem
     public class Helpers
     {
 
-        public static double CalculateWinningAccuracy(int rightDecision, int noOfSimulations)
+        /// <summary>
+        ///  Calculates the percentage between two numbers
+        /// </summary>
+        /// <param name="winningGames"></param>
+        /// <param name="noOfSimulations"></param>
+        /// <returns>Wins in percent rounded to integer</returns>
+        
+        public static double CalculateNumberOfWinsToPercent(int winningGames, int noOfSimulations)
         {
             if (noOfSimulations <= 0)
-                throw new Exception("You can't divide something with zero or lover");
+                throw new Exception("You can't divide something with zero and we won't let you set the dividor to a negative number");
 
-            double accuracyInProcent = (rightDecision / (double)noOfSimulations) * 100;
+            double winningpercentage = (winningGames / (double)noOfSimulations) * 100;
 
-            return Math.Round(accuracyInProcent);
+            return Math.Round(winningpercentage);
         }
     }
 }

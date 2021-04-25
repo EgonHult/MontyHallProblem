@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MontyHallProblem
@@ -14,59 +15,56 @@ namespace MontyHallProblem
         private int ChosenDoor { get; set; }
         private int OpenDoor { get; set; }
 
-        public static int MontyHallGame(int noOfSimulations, int selectedDoor)
+
+        /// <summary>
+        /// Play the Monty Hall Game
+        /// </summary>
+        /// <param name="noOfSimulations"></param>
+        /// <param name="changeOrKeep"> Change door = 1. Keep door = 2</param>
+        /// <returns> Number of winning Games</returns>
+        public static int MontyHallGame(int noOfSimulations, int changeOrKeep)
         {
-            int rightDecision = 0;
 
-            MontyHall montyHall = new MontyHall();
+            if (ValidatParameters(noOfSimulations, changeOrKeep))
+                throw new Exception("One or both parameters are invalid");
 
-            for (int i = 0; i < noOfSimulations; i++)
-            {
+            int winningGames = 0;
 
-                montyHall.SetPrizeDoorRandomly();
-                montyHall.ChooseDoorRandomly();
-                montyHall.RevealDoor();
+                MontyHall montyHall = new MontyHall();
 
-                if (selectedDoor == 1)
+                for (int i = 0; i < noOfSimulations; i++)
                 {
 
-                    if (montyHall.SwithDoor())
+                    montyHall.SetPrizeDoorRandomly();
+                    montyHall.ChooseDoorRandomly();
+                    montyHall.OpenOneDoor();
+
+                    if (changeOrKeep == 1)
                     {
-                        rightDecision++;
+                        if (montyHall.ChangeDoor())
+                        {
+                            winningGames++;
+                        }
+                    }
+
+                    if (changeOrKeep == 2)
+                    {
+                        if (montyHall.KeepDoor())
+                        {
+                            winningGames++;
+                        }
                     }
                 }
 
-                if (selectedDoor == 2)
-                {
-                    if (montyHall.KeepDoor())
-                    {
-                        rightDecision++;
-                    }
-                }
-            }
-
-            return rightDecision;
+                return winningGames;
         }
 
 
-
-        private bool SwithDoor()
-        {
-            return PrizeDoor != ChosenDoor;
-        }
-
-        private bool KeepDoor()
-        {
-            return PrizeDoor == ChosenDoor;
-        }
-
-        private void RevealDoor()
-        {
-            do
-            {
-                OpenDoor = _random.Next(0, 3);
-            } while (OpenDoor == PrizeDoor || OpenDoor == ChosenDoor);
-        }
+        private bool ChangeDoor()
+            => PrizeDoor != ChosenDoor;
+        
+        private bool KeepDoor()       
+            => PrizeDoor == ChosenDoor;
 
         private void SetPrizeDoorRandomly()
         {
@@ -77,5 +75,16 @@ namespace MontyHallProblem
         {
             ChosenDoor = _random.Next(0, 3);
         }
+        private void OpenOneDoor()
+        {
+            do
+            {
+                OpenDoor = _random.Next(0, 3);
+            } while (OpenDoor == PrizeDoor || OpenDoor == ChosenDoor);
+        }
+
+
+        private static bool ValidatParameters(int noOfSimulations, int changeOrKeep)
+          => noOfSimulations < 1  || noOfSimulations > 10_000_000 || !Regex.IsMatch(changeOrKeep.ToString(), "^[1-2]{1}$");
     }
 }
