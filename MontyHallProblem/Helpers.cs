@@ -19,7 +19,7 @@ namespace MontyHallProblem
 
             double winningpercentage = (winningGames / (double)noOfSimulations) * 100;
 
-            return Math.Round(winningpercentage);
+            return Math.Round(winningpercentage, 2);
         }
     }
 }
