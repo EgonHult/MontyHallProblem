@@ -12,9 +12,7 @@ namespace MontyHallProblem
         readonly Random _random = new Random();
 
         private int PrizeDoor { get; set; }
-        private int ChosenDoor { get; set; }
-        private int OpenDoor { get; set; }
-
+        private int ChosenDoor { get; set; }      
 
         /// <summary>
         /// Play the Monty Hall Game
@@ -36,8 +34,7 @@ namespace MontyHallProblem
                 {
 
                     montyHall.SetPrizeDoorRandomly();
-                    montyHall.ChooseDoorRandomly();
-                    montyHall.OpenOneDoor();
+                    montyHall.ChooseDoorRandomly();                  
 
                     if (changeOrKeep == 1)
                     {
@@ -66,25 +63,14 @@ namespace MontyHallProblem
         private bool KeepDoor()       
             => PrizeDoor == ChosenDoor;
 
-        private void SetPrizeDoorRandomly()
-        {
-            PrizeDoor = _random.Next(0, 3);
-        }
-
+        private void SetPrizeDoorRandomly()       
+            => PrizeDoor = _random.Next(0, 3);
+        
         private void ChooseDoorRandomly()
-        {
-            ChosenDoor = _random.Next(0, 3);
-        }
-        private void OpenOneDoor()
-        {
-            do
-            {
-                OpenDoor = _random.Next(0, 3);
-            } while (OpenDoor == PrizeDoor || OpenDoor == ChosenDoor);
-        }
-
-
+            => ChosenDoor = _random.Next(0, 3);
+        
+       
         private static bool ValidatParameters(int noOfSimulations, int changeOrKeep)
-          => noOfSimulations < 1  || noOfSimulations > 10_000_000 || !Regex.IsMatch(changeOrKeep.ToString(), "^[1-2]{1}$");
+            => noOfSimulations < 1  || noOfSimulations > 10_000_000 || !Regex.IsMatch(changeOrKeep.ToString(), "^[1-2]{1}$");
     }
 }
