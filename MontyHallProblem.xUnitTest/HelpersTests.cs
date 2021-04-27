@@ -8,7 +8,7 @@ namespace MontyHallProblem.xUnitTest
     {
 
         [Theory]       
-        [InlineData(455, 2478, 18)]       
+        [InlineData(455, 2478, 18.36)]       
         [InlineData(7, 10, 70)]
         [InlineData(int.MinValue, 5, -42949672960)]
         [InlineData(int.MinValue, int.MaxValue, -100)]
