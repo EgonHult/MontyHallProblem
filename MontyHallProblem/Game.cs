@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MontyHallProblem
 {
-    public class MontyHall
+    public class Game
     {
         readonly Random _random = new Random();
 
@@ -28,7 +28,7 @@ namespace MontyHallProblem
 
             int winningGames = 0;
 
-                MontyHall montyHall = new MontyHall();
+                Game montyHall = new Game();
 
                 for (int i = 0; i < noOfSimulations; i++)
                 {

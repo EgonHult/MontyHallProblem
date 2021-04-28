@@ -17,13 +17,13 @@ namespace MontyHallProblem
                 Console.Clear();
 
                 int selectedDoor = ChangeOrKeepDoor();
-
                 Console.Clear();
+
                 Console.WriteLine("\nPerfect! Press any key to se the result");
                 Console.ReadKey();
                 Console.Clear();
 
-                int winningGames = MontyHall.MontyHallGame(noOfSimulations, selectedDoor);
+                int winningGames = Game.MontyHallGame(noOfSimulations, selectedDoor);
 
                 double winningpercentage = Helpers.CalculateNumberOfWinsToPercent(winningGames, noOfSimulations);
 

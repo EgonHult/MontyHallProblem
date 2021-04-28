@@ -1,12 +1,26 @@
 using System;
 using Xunit;
-using static MontyHallProblem.MontyHall;
+using static MontyHallProblem.Game;
 
 
 namespace MontyHallProblem.xUnitTest
 {
     public class MontyHallTests
     {
+
+        [Theory]
+        [InlineData(5, 2)]
+        [InlineData(10_000_000, 1)]
+        [InlineData(165_464, 2)]
+        [InlineData(5, 1)]
+        [InlineData(1, 2)]
+        public void MontyHallGame_SetTwoValidParameters_ReturnInt32(int noOfSimulations, int changeOrKeep)
+        {
+
+            var actual = MontyHallGame(noOfSimulations, changeOrKeep);
+
+            Assert.Equal(typeof(int), actual.GetType());
+        }
 
         [Theory]
         [InlineData(5, 12)]      
@@ -23,22 +37,5 @@ namespace MontyHallProblem.xUnitTest
             var ex = Assert.Throws<Exception>(() => MontyHallGame(noOfSimulations, changeOrKeep));
             Assert.Equal("One or both parameters are invalid", ex.Message);
         }
-
-
-        [Theory]
-        [InlineData(5, 2)]
-        [InlineData(10_000_000, 1)]
-        [InlineData(165_464, 2)]
-        [InlineData(5, 1)]
-        [InlineData(1, 2)]     
-        public void MontyHallGame_SetTwoValidParameters_ReturnInt32(int noOfSimulations, int changeOrKeep)
-        {
-            
-            var actual = MontyHallGame(noOfSimulations, changeOrKeep);
-
-            Assert.Equal(typeof(int), actual.GetType());
-        }
-
-
     }
 }
