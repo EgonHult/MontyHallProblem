@@ -59,9 +59,5 @@ namespace MontyHallProblem
             Console.ReadKey();
             Console.Clear();
         }
-
-
-
-
     }
 }

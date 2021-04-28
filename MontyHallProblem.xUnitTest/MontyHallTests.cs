@@ -22,6 +22,7 @@ namespace MontyHallProblem.xUnitTest
             Assert.Equal(typeof(int), actual.GetType());
         }
 
+
         [Theory]
         [InlineData(5, 12)]      
         [InlineData(0, 1)]
