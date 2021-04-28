@@ -1,4 +1,5 @@
 ﻿using System;
+using static MontyHallProblem.Menu;
 
 namespace MontyHallProblem
 {
@@ -12,12 +13,10 @@ namespace MontyHallProblem
 
             while (true)
             {
-                Console.WriteLine("\nHow many simulations do you whant to do? (Tips: Go high and simulat at least 10000 games for higher accuracy)\n");
-
-                int noOfSimulations = GameMenuSelection.NumberOfSimulations();
+                int noOfSimulations = NumberOfSimulations();
                 Console.Clear();
-                Console.WriteLine();
-                int selectedDoor = GameMenuSelection.ChangeOrKeepDoor();
+
+                int selectedDoor = ChangeOrKeepDoor();
 
                 Console.Clear();
                 Console.WriteLine("\nPerfect! Press any key to se the result");
@@ -25,18 +24,14 @@ namespace MontyHallProblem
                 Console.Clear();
 
                 int winningGames = MontyHall.MontyHallGame(noOfSimulations, selectedDoor);
-            
+
                 double winningpercentage = Helpers.CalculateNumberOfWinsToPercent(winningGames, noOfSimulations);
 
-                Console.WriteLine("\nNew car owners:\t" + winningGames +
-                                  "\n\nAttempts:\t"+ noOfSimulations);
-
-                Console.WriteLine($"\nWinning accuracy: {winningpercentage}%");
-                Console.WriteLine("\nPress any key to try again");
-                Console.ReadKey();
-                Console.Clear();
+                EndMessage(noOfSimulations, winningGames, winningpercentage);
             }
 
         }
+
+       
     }
 }
