@@ -10,8 +10,7 @@ namespace MontyHallProblem
         /// </summary>
         /// <param name="winningGames"></param>
         /// <param name="noOfSimulations"></param>
-        /// <returns>Wins in percent rounded to integer</returns>
-        
+        /// <returns>Wins in percent rounded</returns>       
         public static double CalculateNumberOfWinsToPercent(int winningGames, int noOfSimulations)
         {
             if (noOfSimulations <= 0)

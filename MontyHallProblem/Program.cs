@@ -5,7 +5,6 @@ namespace MontyHallProblem
 {
     class Program
     {
-
         static void Main(string[] args)
         {
 
@@ -29,9 +28,6 @@ namespace MontyHallProblem
 
                 EndMessage(noOfSimulations, winningGames, winningpercentage);
             }
-
-        }
-
-       
+        }      
     }
 }
