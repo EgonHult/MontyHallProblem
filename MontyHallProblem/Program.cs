@@ -15,7 +15,7 @@ namespace MontyHallProblem
                 int noOfSimulations = NumberOfSimulations();
                 Console.Clear();
 
-                int selectedDoor = ChangeOrKeepDoor();
+                bool selectedDoor = ChangeOrKeepDoor();
                 Console.Clear();
 
                 Console.WriteLine("\nPerfect! Press any key to se the result");

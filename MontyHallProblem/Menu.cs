@@ -29,24 +29,33 @@ namespace MontyHallProblem
              => noOfSimulations <= 0 || noOfSimulations > 10_000_000;
 
 
-        internal static int ChangeOrKeepDoor()
-        {          
-         
-            bool isRunning = true;
-            int changeOrKeep = 0;
+        internal static bool ChangeOrKeepDoor()
+        {
 
-            while (isRunning)
+            bool isRunning = true;
+            bool? KeepDoor = null;
+
+            do
             {
                 Console.WriteLine("\nChoose if you whant to change or keep the door\n");
                 Console.WriteLine("[1] Change door");
                 Console.WriteLine("[2] Keep door\n");
-                int.TryParse(Console.ReadLine(), out changeOrKeep);
+                int.TryParse(Console.ReadLine(), out int decision);
 
-                if (changeOrKeep == 1 || changeOrKeep == 2)
+                if (decision == 1)
+                {
+                    KeepDoor = false;
                     isRunning = false;
-            }
+                }
+                else if (decision == 2)
+                {
+                    KeepDoor = true;
+                    isRunning = false;
+                }
 
-            return changeOrKeep;
+            } while (isRunning);
+
+            return (bool)KeepDoor;
         }
 
         internal static void EndMessage(int noOfSimulations, int winningGames, double winningpercentage)
