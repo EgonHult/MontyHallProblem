@@ -20,10 +20,10 @@ namespace MontyHallProblem
         /// <param name="noOfSimulations"></param>
         /// <param name="KeepDoor"></param>
         /// <returns> Number of winning Games</returns>
-        public static int MontyHallGame(int noOfSimulations, bool KeepDoor)
+        public static int MontyHallGame(int noOfSimulations, bool? KeepDoor)
         {
 
-            if (ValidatParameter(noOfSimulations))
+            if (ValidatParameter(noOfSimulations, KeepDoor))
                 throw new Exception("One or both parameters are invalid");
 
             int winningGames = 0;
@@ -70,7 +70,7 @@ namespace MontyHallProblem
             => ChosenDoor = _random.Next(0, 3);
 
 
-        private static bool ValidatParameter(int noOfSimulations)
-            => noOfSimulations < 1 || noOfSimulations > 10_000_000;
+        private static bool ValidatParameter(int noOfSimulations, bool? KeepDoor)
+            => noOfSimulations < 1 || noOfSimulations > 10_000_000 || KeepDoor == null;
     }
 }

@@ -15,14 +15,14 @@ namespace MontyHallProblem
                 int noOfSimulations = NumberOfSimulations();
                 Console.Clear();
 
-                bool selectedDoor = ChangeOrKeepDoor();
+                bool KeepDoor = ChangeOrKeepDoor();
                 Console.Clear();
 
                 Console.WriteLine("\nPerfect! Press any key to se the result");
                 Console.ReadKey();
                 Console.Clear();
 
-                int winningGames = Game.MontyHallGame(noOfSimulations, selectedDoor);
+                int winningGames = Game.MontyHallGame(noOfSimulations, KeepDoor);
 
                 double winningpercentage = Helpers.CalculateNumberOfWinsToPercent(winningGames, noOfSimulations);
 
